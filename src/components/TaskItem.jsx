@@ -9,8 +9,8 @@ const TaskItem = ({ task, id, completed }) => {
 
   const handleEditTask = () => {
     if (newTask.trim()) {
-      dispatch(editTask(id, newTask));
-      setIsEditing(false);
+      dispatch(editTask(id, newTask)); // Dispatch the action to edit the task
+      setIsEditing(false); // Exit the editing mode
     }
   };
 
@@ -38,7 +38,7 @@ const TaskItem = ({ task, id, completed }) => {
           <input
             type="checkbox"
             checked={completed}
-            onChange={() => dispatch(toggleTask(id))}
+            onChange={() => dispatch(toggleTask(id))} // Dispatch the action to toggle the task
             style={{
               width: "20px",
               height: "20px",

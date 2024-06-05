@@ -2,9 +2,9 @@ import { ADD_TASK, DELETE_TASK, EDIT_TASK, TOGGLE_TASK } from "./actions";
 
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("tasks");
+    const serializedState = localStorage.getItem("tasks"); // Load the tasks from local storage
     if (serializedState === null) {
-      return { tasks: [] };
+      return { tasks: [] }; // If there are no tasks, return an empty array
     }
     return JSON.parse(serializedState);
   } catch (e) {
@@ -15,13 +15,14 @@ const loadState = () => {
 
 const initialState = loadState();
 
+// Get the next task ID
 let nextTaskId = initialState.tasks.length
   ? initialState.tasks[initialState.tasks.length - 1].id + 1
   : 0;
 
 const saveState = (state) => {
   try {
-    const serializedState = JSON.stringify(state);
+    const serializedState = JSON.stringify(state); // Save the tasks to local storage
     localStorage.setItem("tasks", serializedState);
   } catch (e) {
     console.warn("Error saving state to local storage", e);
@@ -35,15 +36,16 @@ const reducer = (state = initialState, action) => {
       newState = {
         ...state,
         tasks: [
+          // Add a new task to the tasks array
           ...state.tasks,
-          { id: nextTaskId++, text: action.payload.text },
+          { id: nextTaskId++, text: action.payload.text }, // Assign the next task ID
         ],
       };
       break;
     case DELETE_TASK:
       newState = {
         ...state,
-        tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+        tasks: state.tasks.filter((task) => task.id !== action.payload.id), // Remove the task with the specified ID
       };
       break;
     case EDIT_TASK:
@@ -51,7 +53,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.map((task) =>
           task.id === action.payload.id
-            ? { ...task, text: action.payload.text }
+            ? { ...task, text: action.payload.text } // Update the task with the specified ID
             : task
         ),
       };
@@ -61,7 +63,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.map((task) =>
           task.id === action.payload.id
-            ? { ...task, completed: !task.completed }
+            ? { ...task, completed: !task.completed } // Toggle the completed status of the task with the specified ID
             : task
         ),
       };
@@ -69,7 +71,7 @@ const reducer = (state = initialState, action) => {
     default:
       newState = state;
   }
-  saveState(newState);
+  saveState(newState); // Save the updated state to local storage
   return newState;
 };
 

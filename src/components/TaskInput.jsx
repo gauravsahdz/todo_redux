@@ -6,9 +6,11 @@ const TaskInput = () => {
   const [task, setTask] = useState("");
   const dispatch = useDispatch();
 
+  // Add a new task
   const handleAddTask = () => {
+    // Check if the task is not empty
     if (task.trim()) {
-      dispatch(addTask(task));
+      dispatch(addTask(task)); // Dispatch the action to add a new task
       setTask("");
     }
   };

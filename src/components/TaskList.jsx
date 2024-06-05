@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import TaskItem from "./TaskItem";
 
 const TaskList = () => {
-  const tasks = useSelector((state) => state.tasks);
+  const tasks = useSelector((state) => state.tasks); // Get the tasks from the store
 
   return (
     <div className="task-list">
