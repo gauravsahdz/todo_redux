@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+## To-Do List Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simple To-Do list application built with React and Redux. It allows users to add, view, edit, and delete tasks. Tasks are persisted in the browser's local storage, ensuring that they are not lost on page reload.
 
-## Available Scripts
+### Features
 
-In the project directory, you can run:
+- Add new tasks
+- View a list of tasks
+- Edit tasks
+- Delete tasks
+- Persist tasks in local storage
 
-### `npm start`
+### Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`my-todo-app/
+│
+├── public/
+│   ├── index.html
+│   └── ...
+│
+├── src/
+│   ├── components/
+│   │   ├── TaskInput.js
+│   │   ├── TaskItem.js
+│   │   └── TaskList.js
+│   ├── store/
+│   │   ├── actions.js
+│   │   ├── reducer.js
+│   │   └── store.js
+│   ├── App.js
+│   ├── index.js
+│   └── App.css
+│
+├── package.json
+└── README.md`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Installation
 
-### `npm test`
+1.  Clone the repository
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        `git clone https://github.com/your-username/my-todo-app.git
 
-### `npm run build`
+    cd my-todo-app`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2.  Install dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    `npm install`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3.  Run the application
 
-### `npm run eject`
+    `npm start`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    The application will be available at `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4.  If getting this error `Error: Cannot find module 'ajv/dist/compile/codegen'`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    `npm install --save-dev ajv@^7`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Usage
 
-## Learn More
+1.  Add a Task
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    - Type a task into the input field and click the "Add Task" button or press Enter.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2.  View Tasks
 
-### Code Splitting
+    - Tasks will be displayed in a list below the input field.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3.  Edit a Task
 
-### Analyzing the Bundle Size
+    - Click the "Edit" button next to a task, update the task text, and click "Save".
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4.  Delete a Task
 
-### Making a Progressive Web App
+    - Click the "Delete" button next to a task to remove it from the list.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Code Overview
 
-### Advanced Configuration
+#### Components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- TaskInput.js
 
-### Deployment
+  - Contains an input field and a button to add new tasks.
+  - Uses React hooks (`useState`) and Redux's `useDispatch` to manage state and dispatch actions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- TaskItem.js
 
-### `npm run build` fails to minify
+  - Represents an individual task item.
+  - Allows editing and deleting tasks.
+  - Uses React hooks (`useState`) and Redux's `useDispatch` to manage state and dispatch actions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- TaskList.js
+
+  - Displays a list of tasks.
+  - Uses Redux's `useSelector` to access the state.
+
+#### Redux Store
+
+- actions.js
+
+  - Defines action types and action creators for adding, deleting, and editing tasks.
+
+- reducer.js
+
+  - Defines the initial state and the reducer function to handle actions.
+  - Includes logic to load the initial state from local storage and save the state to local storage on updates.
+
+- store.js
+
+  - Creates and exports the Redux store.
+
+#### Main Application
+
+- App.js
+
+  - The main application component that renders `TaskInput` and `TaskList`.
+
+- index.js
+
+  - The entry point of the application that renders the `App` component inside a Redux `Provider`.
+  - Uses `createRoot` from React 18 for rendering.
+
+#### Styles
+
+- App.css
+  - Contains basic styling for the application components.
+
+### Future Enhancements
+
+- Mark tasks as completed.
+- Filter tasks (e.g., show only completed or active tasks).
+- Add due dates and reminders for tasks.
+- Improve the UI/UX with more advanced styling and animations.
